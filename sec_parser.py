@@ -12,6 +12,7 @@ import re
 from bs4 import BeautifulSoup
 from bs4.element import NavigableString
 from sys import argv
+from time import time
 
 
 class SECParser(object):
@@ -37,6 +38,8 @@ class SECParser(object):
         The plan for 'document.txt' is to iterate through the children tags in
         the body; getting the text content from them should be straightforward
         """
+        if not self.soup:
+            self.soup = BeautifulSoup(self.text)
         body = self.soup.find('body')
         with open('document.txt', 'wb') as f1:
             for tag in body.children:
@@ -89,6 +92,8 @@ if __name__ == '__main__':
     with open(filename) as file:
         parser = SECParser(file)
 
+    t1 = time()
     parser.preprocess()
     parser.generate_document()
     parser.generate_paragraphs()
+    print('Finished in', time() - t1, 'secs')

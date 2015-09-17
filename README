@@ -1,0 +1,43 @@
+Approach
+========
+Once I read the projecrt description, I knew I'd be working with BeautifulSoup
+since I was familiar with it. I first inspected the file in Google Chrome using
+the developer tools and looked at the raw HTML file itself to better understand
+how I'd develop the parser.
+
+First, I preprocessed the files to speed up processing. I noticed that there
+were a lot of style attributes; I stripped those since I wouldn't need them.
+This reduced the file size by over 60%. I also converted '<br>' tags to '\n'.
+This simplified the logic for formatting the 'document.txt' file.
+
+To create document.txt, I went through the child tags in <body> and wrote
+the text content to the file. Because of the <br> preprocessing, the spacing
+was decent.
+
+To create paragraphs.txt, I went again through all of the child tags in <body>
+and looked for text content that had a '$' symbol but wasn't in a table. I initially
+missed a lot of paragraphs due to unclosed <hr> tags that BeautifulSoup chose
+to close at the end of the file, but I worked around that by using a 'dig' method
+to process those nested tags.
+
+
+Time On Project
+===============
+I completed the project over the course of 4.5 hours. I should note that there was
+an hour-long break in my work during which I shopped for groceries.
+
+
+Libraries
+=========
+I mostly relied on BeautifulSoup and Python builtins (re, json, sys).
+I used the time module for timing purposes.
+
+
+Instructions
+============
+Usage: python3 sec_parser.py <filename>
+
+
+Output Files
+============
+The output files are located in the root of this repo, alongside this README file.
