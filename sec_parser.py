@@ -78,8 +78,9 @@ class SECParser(object):
             document_txt = f1.read().decode()
         search_chars = 20
         paragraphs = dig(self.soup.find('body'), 0)
+        paragraphs = sorted(paragraphs, key=lambda x: x['start'])
         with open('paragraphs.txt', 'wb') as f2:
-            f2.write(json.dumps(paragraphs).encode())
+            f2.write(json.dumps(paragraphs, indent=2, sort_keys=True).encode())
 
 
 if __name__ == '__main__':
